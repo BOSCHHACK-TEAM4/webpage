@@ -58,8 +58,8 @@
 
 							<!-- name-and-slogan -->
 							<div class="site-name-and-slogan smooth-scroll">
-								<div class="site-name"><a href="#banner">Worthy</a></div>
-								<div class="site-slogan">Free Bootstrap Theme by <a target="_blank" href="http://htmlcoder.me">HtmlCoder</a></div>
+								<div class="site-name"><a href="#banner">AD master</a></div>
+								<div class="site-slogan">Powered by BOSCH XDK and Microsoft face recognition api</div>
 							</div>
 
 						</div>
@@ -91,12 +91,12 @@
 								<img id="cam" src="../test.jpg" alt="not found"></img>
 								<br></br>
 								<ul class="list-unstyled">
-									<li><i id="date" class="fa fa-caret-right pr-10 text-colored"></i> Date</li>
-									<li><i id="temperature" class="fa fa-caret-right pr-10 text-colored"></i> Temperature</li>
-									<li><i id="humidity" class="fa fa-caret-right pr-10 text-colored"></i> Humidity</li>
-									<li><i id="age" class="fa fa-caret-right pr-10 text-colored"></i> Age</li>
-									<li><i id="gender" class="fa fa-caret-right pr-10 text-colored"></i> Gender</li>
-									<li><i class="fa fa-caret-right pr-10 text-colored"></i> Contact us</li>
+									<li id="date"></li>
+									<li id="temperature"></li>
+									<li id="humidity"></li>
+									<li id="age"></li>
+									<li id="gender"></li>
+									<li>Contact us</li>
 								</ul>
 								<p><br></br></p>
 								<p><br></br></p>
@@ -159,7 +159,7 @@
 				setTimeout("refresh()", 5000);
 				if (c==2){
 					// resend a get request
-					//sendReq();
+					sendReq();
 				}
 			}
 
@@ -181,50 +181,55 @@
 			}
 			setTimeout("video()",1000);
 			
+			*/
+			var date = "future";
+			var temperature = "-273";
+			var humidity = "100";
+			var age = "999";
+			var gender = "futa";
 
 			function updateText(){
-				$.("#date").html("Date: "+date);
-				$.("#temperature").html("Temperature: "+temperature+"centi degree");
-				$.("#humidity").html("Humidity: "+humidity+"%");
-				$.("#age").html("Age: "+age);
-				$.("#gender").html("Gender: "+gender);
+				$("#date").html("Date: "+date);
+				$("#temperature").html("Temperature: "+temperature+" C");
+				$("#humidity").html("Humidity: "+humidity+"%");
+				$("#age").html("Age: "+age);
+				$("#gender").html("Gender: "+gender);
 			}
-			*/
+			
 			//updageText();
 			
 
 			// server's url
-			//function sendReq(){
-			var url = "http://172.31.11.38:8000/sensors/";
-			$.ajax({
-				url: url + "&callback=?",
-				type:'GET',
-				success: function(resp){
-					alert(resp);
-					
-					var obj = JSON.parse(resp);
-					slots[0] = imgs[obj.index1];
-					slots[1] = imgs[obj.index2];
-					slots[2] = imgs[obj.index3];
-					date = obj.time;
-					temperature = obj.temperature;
-					humidity = obj.humidity;
-					age = obj.age;
-					gender = obj.gender;
-					//updateText();
-					console.log(slots[0]);
-					console.log(slots[1]);
-					console.log(slots[2]);
-					console.log(age);
-					console.log(gender);
-				},
-				error: function(e){
-					alert('Error:'+e);
-				}
-			});
-			//}
+			function sendReq(){
+				var url = "http://172.31.11.38:8000/sensors/";
+				$.ajax({
+					url: url + "&callback=?",
+					type:'GET',
+					success: function(resp){
+						//alert(resp);
+						var obj = JSON.parse(resp);
+						slots[0] = imgs[obj.index1];
+						slots[1] = imgs[obj.index2];
+						slots[2] = imgs[obj.index3];
+						date = obj.time;
+						temperature = obj.temperature;
+						humidity = obj.humidity;
+						age = obj.age;
+						gender = obj.gender;
+						updateText();
+						console.log(slots[0]);
+						console.log(slots[1]);
+						console.log(slots[2]);
+						console.log(age);
+						console.log(gender);
+					},
+					error: function(e){
+						alert('Error:'+e);
+					}
+				});
+			}
 			
-			//sendReq();
+			sendReq();
 			
 		</script>
 	</body>
