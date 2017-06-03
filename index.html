@@ -171,21 +171,38 @@
 			setTimeout("refresh()", 5000);
 			
 			// server's url
-			var url = "";
-			$.get(url, function(result){
-				var text = result.text;
-				var update_list = text;
-				console.log(text);
+			/*
+			var mycallback = function (data) {
+				console.log(1);
+				console.log("callback", data);
+			};
 
-				var str = "{ 'first': 12, 'second': 21}";
-				var obj = str.parseJSON();
-				console.log(str);
-				console.log(obj.first);
-				/*
-				for (var i=0; i<n; i++){
-					slots[i] = imgs[i];
+			$(document).ready(function () {
+				$.ajax({
+					type: 'GET',
+					url: 'http://172.31.11.38:8000/sensors',
+					contentType: 'application/jsonp',
+					dataType: "jsonp",
+					data: {},
+					success: mycallback,
+					error: function (xhr, status, err) {
+						console.log(status, err);
+					}
+				});
+			});
+			*/
+			
+			var url = "http://172.31.11.38:8000/sensors/";
+			$.ajax({
+				url: url + "temp",
+				type:'GET',
+				dataType:'jsonp',
+				success: function(resp){
+					alert(resp);
+				},
+				error: function(e){
+					alert('Error:'+e);
 				}
-				*/
 			});
 			
 		</script>
