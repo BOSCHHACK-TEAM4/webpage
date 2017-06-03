@@ -4,35 +4,35 @@
 <html lang="en">
 <!--<![endif]-->
 	<head>
-		<meta charset="utf-8">
+		<meta charset="utf-8"></meta>
 		<title>Worthy | Free Powerful Theme by HtmlCoder</title>
-		<meta name="description" content="Worthy a Bootstrap-based, Responsive HTML5 Template">
-		<meta name="author" content="htmlcoder.me">
+		<meta name="description" content="Worthy a Bootstrap-based, Responsive HTML5 Template"></meta>
+		<meta name="author" content="htmlcoder.me"></meta>
 
 		<!-- Mobile Meta -->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
 
 		<!-- Favicon -->
-		<link rel="shortcut icon" href="images/favicon.ico">
+		<link rel="shortcut icon" href="images/favicon.ico"></link>
 
 		<!-- Web Fonts -->
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,300&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-		<link href='http://fonts.googleapis.com/css?family=Raleway:700,400,300' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,300&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'></link>
+		<link href='http://fonts.googleapis.com/css?family=Raleway:700,400,300' rel='stylesheet' type='text/css'></link>
 
 		<!-- Bootstrap core CSS -->
-		<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+		<link href="bootstrap/css/bootstrap.css" rel="stylesheet"></link>
 
 		<!-- Font Awesome CSS -->
-		<link href="fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+		<link href="fonts/font-awesome/css/font-awesome.css" rel="stylesheet"></link>
 
 		<!-- Plugins -->
-		<link href="css/animations.css" rel="stylesheet">
+		<link href="css/animations.css" rel="stylesheet"></link>
 
 		<!-- Worthy core CSS file -->
-		<link href="css/style.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet"></link>
 
 		<!-- Custom css --> 
-		<link href="css/custom.css" rel="stylesheet">
+		<link href="css/custom.css" rel="stylesheet" ></link>
 	</head>
 
 	<body class="no-trans">
@@ -53,7 +53,7 @@
 
 							<!-- logo -->
 							<div class="logo smooth-scroll">
-								<a href="#banner"><img id="logo" src="images/logo.png" alt="Worthy"></a>
+								<a href="#banner"><img id="logo" src="images/logo.png" alt="Worthy"></img></a>
 							</div>
 
 							<!-- name-and-slogan -->
@@ -84,33 +84,32 @@
 						<div class="space"></div>
 						<div class="row">
 							<div class="col-md-8">
-								<img src="images/portfolio-10.jpg" alt="">
+								<img id="ad" src="images/ad0.jpg" alt=""></img>
 								<div class="space"></div>
 							</div>
 							<div class="col-md-4">
-								<img src="images/portfolio-10.jpg" alt="">
-								<br>
+								<img id="cam" src="../test.jpg" alt="not found"></img>
+								<br></br>
 								<ul class="list-unstyled">
 									<li><i class="fa fa-caret-right pr-10 text-colored"></i> Date</li>
 									<li><i class="fa fa-caret-right pr-10 text-colored"></i> Temperature</li>
 									<li><i class="fa fa-caret-right pr-10 text-colored"></i> Humidity</li>
 									<li><i class="fa fa-caret-right pr-10 text-colored"></i> Having ads?</li>
 								</ul>
-								<p><br></p>
-								<p><br></p>
-								<p><br></p>
-								<p><br></p>
-								<p><br></p>
-								<p><br></p>
-								<p><br></p>
-								<p><br></p>
-								<p><br></p>
-								<p><br></p>
-								<p><br></p>
-								<p><br></p>
+								<p><br></br></p>
+								<p><br></br></p>
+								<p><br></br></p>
+								<p><br></br></p>
+								<p><br></br></p>
+								<p><br></br></p>
+								<p><br></br></p>
+								<p><br></br></p>
+								<p><br></br></p>
+								<p><br></br></p>
+								<p><br></br></p>
+								<p><br></br></p>
 							</div>
 						</div>
-						
 					</div>
 				</div>
 			</div>
@@ -140,6 +139,55 @@
 
 		<!-- Custom Scripts -->
 		<script type="text/javascript" src="js/custom.js"> </script>
-		<script type="text/javascript" src="js/refresh.js"> </script>
+		<!--script type="text/javascript" src="js/refresh.js"> </script -->
+		
+		<!-- advertisement refresh loop -->
+		<script type="text/javascript">
+			// # of ads within a set
+			var n = 3;
+			// current ad indext in the current set
+			var c = 0;
+			function refresh(){
+				$("#ad").fadeOut("10000");
+				$("#ad").replaceWith( "<img id='ad' src='" + slots[(c+1)%3] + "' alt=''>");
+				//console.log($("#ad").src);
+				c = (c+1)%n;
+				$('#ad').fadeIn("10000");
+				setTimeout("refresh()", 5000);
+				if (c==2){
+					// send a get request
+				}
+			}
+
+			// initialize full imgs set and n slots
+			var imgs = new Array();
+			for (var i=0; i<20; i++){
+				imgs[i] = "images/ad" + i + ".jpg";
+			}
+			var slots = new Array();
+			for (var i=0; i<n; i++){
+				slots[i] = imgs[i];
+			}
+			setTimeout("refresh()", 5000);
+			
+			// server's url
+			var url = "";
+			$.get(url, function(result){
+				var text = result.text;
+				var update_list = text;
+				console.log(text);
+
+				var str = "{ 'first': 12, 'second': 21}";
+				var obj = str.parseJSON();
+				console.log(str);
+				console.log(obj.first);
+				/*
+				for (var i=0; i<n; i++){
+					slots[i] = imgs[i];
+				}
+				*/
+			});
+			
+		</script>
 	</body>
 </html>
