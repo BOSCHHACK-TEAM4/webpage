@@ -91,10 +91,12 @@
 								<img id="cam" src="../test.jpg" alt="not found"></img>
 								<br></br>
 								<ul class="list-unstyled">
-									<li><i class="fa fa-caret-right pr-10 text-colored"></i> Date</li>
-									<li><i class="fa fa-caret-right pr-10 text-colored"></i> Temperature</li>
-									<li><i class="fa fa-caret-right pr-10 text-colored"></i> Humidity</li>
-									<li><i class="fa fa-caret-right pr-10 text-colored"></i> Having ads?</li>
+									<li><i id="date" class="fa fa-caret-right pr-10 text-colored"></i> Date</li>
+									<li><i id="temperature" class="fa fa-caret-right pr-10 text-colored"></i> Temperature</li>
+									<li><i id="humidity" class="fa fa-caret-right pr-10 text-colored"></i> Humidity</li>
+									<li><i id="age" class="fa fa-caret-right pr-10 text-colored"></i> Age</li>
+									<li><i id="gender" class="fa fa-caret-right pr-10 text-colored"></i> Gender</li>
+									<li><i class="fa fa-caret-right pr-10 text-colored"></i> Contact us</li>
 								</ul>
 								<p><br></br></p>
 								<p><br></br></p>
@@ -150,12 +152,14 @@
 			function refresh(){
 				$("#ad").fadeOut("10000");
 				$("#ad").replaceWith( "<img id='ad' src='" + slots[(c+1)%3] + "' alt=''>");
+				$("#cam").replaceWith( "<img id='cam' src='../test.jpg' alt=''>");
 				//console.log($("#ad").src);
 				c = (c+1)%n;
 				$('#ad').fadeIn("10000");
 				setTimeout("refresh()", 5000);
 				if (c==2){
-					// send a get request
+					// resend a get request
+					//sendReq();
 				}
 			}
 
@@ -169,41 +173,58 @@
 				slots[i] = imgs[i];
 			}
 			setTimeout("refresh()", 5000);
-			
-			// server's url
 			/*
-			var mycallback = function (data) {
-				console.log(1);
-				console.log("callback", data);
-			};
-
-			$(document).ready(function () {
-				$.ajax({
-					type: 'GET',
-					url: 'http://172.31.11.38:8000/sensors',
-					contentType: 'application/jsonp',
-					dataType: "jsonp",
-					data: {},
-					success: mycallback,
-					error: function (xhr, status, err) {
-						console.log(status, err);
-					}
-				});
-			});
-			*/
+			// video stream
+			function video(){
+				$("#cam").replaceWith( "<img id='cam' src='../test.jpg' alt=''>");
+				setTimeout("video()", 1000);
+			}
+			setTimeout("video()",1000);
 			
+
+			function updateText(){
+				$.("#date").html("Date: "+date);
+				$.("#temperature").html("Temperature: "+temperature+"centi degree");
+				$.("#humidity").html("Humidity: "+humidity+"%");
+				$.("#age").html("Age: "+age);
+				$.("#gender").html("Gender: "+gender);
+			}
+			*/
+			//updageText();
+			
+
+			// server's url
+			//function sendReq(){
 			var url = "http://172.31.11.38:8000/sensors/";
 			$.ajax({
-				url: url + "temp",
+				url: url + "&callback=?",
 				type:'GET',
-				dataType:'jsonp',
 				success: function(resp){
 					alert(resp);
+					
+					var obj = JSON.parse(resp);
+					slots[0] = imgs[obj.index1];
+					slots[1] = imgs[obj.index2];
+					slots[2] = imgs[obj.index3];
+					date = obj.time;
+					temperature = obj.temperature;
+					humidity = obj.humidity;
+					age = obj.age;
+					gender = obj.gender;
+					//updateText();
+					console.log(slots[0]);
+					console.log(slots[1]);
+					console.log(slots[2]);
+					console.log(age);
+					console.log(gender);
 				},
 				error: function(e){
 					alert('Error:'+e);
 				}
 			});
+			//}
+			
+			//sendReq();
 			
 		</script>
 	</body>
