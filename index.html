@@ -150,9 +150,14 @@
 			var n = 3;
 			// current ad indext in the current set
 			var c = 0;
-			function refresh(){
+			function updateAd(){
 				$("#ad").fadeOut("10000");
 				$("#ad").replaceWith( "<img id='ad' src='" + slots[(c+1)%3] + "' alt=''>");
+				$('#ad').fadeIn("10000");
+			}
+
+			function refresh(){
+				updateAD();
 				$("#cam").fadeOut();
 				d = new Date();
 				$("#cam").attr("src", "../test.jpg?"+d.getTime());
@@ -160,7 +165,6 @@
 				//$("#cam").replaceWith( "<img id='cam' src='../test.jpg' alt=''>");
 				//console.log($("#ad").src);
 				c = (c+1)%n;
-				$('#ad').fadeIn("10000");
 				setTimeout("refresh()", 5000);
 				if (c==2){
 					// resend a get request
@@ -246,6 +250,7 @@
 						gender = obj.gender;
 						number = obj.humanNum;
 						updateText();
+						updateAD();
 						// console.log(slots[0]);
 						// console.log(slots[1]);
 						// console.log(slots[2]);
