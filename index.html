@@ -94,6 +94,7 @@
 									<li id="date"></li>
 									<li id="temperature"></li>
 									<li id="humidity"></li>
+									<li id="people"></li>
 									<li id="age"></li>
 									<li id="gender"></li>
 									<li>Contact us: 123-456-7890</li>
@@ -191,6 +192,7 @@
 			var humidity = "100";
 			var age = "999";
 			var gender = "futa";
+			var number = "0";
 
 			function updateText(){
 				$("#date").html("Date: "+date);
@@ -198,14 +200,15 @@
 				$("#humidity").html("Humidity: "+ humidity +"%");
 				$("#age").html("Age: "+ age );
 				$("#gender").html("Gender: "+ gender );
+				$("#people").html("People: "+ number);
 			}
-			
 			//updageText();
 			
 
 			// server's url
 			function sendReq(){
 				var url = "http://172.31.11.38:8000/sensors/";
+				//var url = "http://139.219.188.151/"
 				$.ajax({
 					url: url + "&callback=?",
 					type:'GET',
@@ -220,6 +223,7 @@
 						humidity = obj.humidity;
 						age = obj.age;
 						gender = obj.gender;
+						number = obj.humanNum;
 						updateText();
 						console.log(slots[0]);
 						console.log(slots[1]);
