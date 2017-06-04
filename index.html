@@ -165,7 +165,7 @@
 				//$("#cam").replaceWith( "<img id='cam' src='../test.jpg' alt=''>");
 				//console.log($("#ad").src);
 				c = (c+1)%n;
-				setTimeout("refresh()", 5000);
+				setTimeout("refresh()", 3000);
 				if (c==2){
 					// resend a get request
 					sendReq();
@@ -181,7 +181,7 @@
 			for (var i=0; i<n; i++){
 				slots[i] = imgs[i];
 			}
-			setTimeout("refresh()", 5000);
+			setTimeout("refresh()", 3000);
 			/*
 			// video stream
 			function video(){
@@ -242,6 +242,9 @@
 							slots[0] = "images/ad" + 1 + ".jpg";
 							slots[1] = "images/ad" + 9 + ".jpg";
 							slots[2] = "images/ad" + 10 + ".jpg";
+						}
+						if ( parseInt(obj.age) < 12){
+							slots[0] = "images/ad" + 17 + ".jpg";
 						}
 						date = obj.time;
 						temperature = obj.temperature;
