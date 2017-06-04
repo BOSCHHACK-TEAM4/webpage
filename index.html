@@ -218,8 +218,23 @@
 						slots[0] = imgs[obj.index1];
 						slots[1] = imgs[obj.index2];
 						slots[2] = imgs[obj.index3];
-						console.log(obj.index1, obj.index2, obj.index3);
-						
+						if (obj.gender=="male"){
+							slots[0] = "images/ad" + 7 + ".jpg";
+							slots[1] = "images/ad" + 18 + ".jpg";
+							if ( parseInt(obj.temperature) >30 ){
+								slots[2] = "images/ad" + 4 + ".jpg";
+							}else{
+								slots[2] = "images/ad" + 15 + ".jpg";
+							}
+						}else{
+							slots[0] = "images/ad" + 14 + ".jpg";
+							slots[1] = "images/ad" + 10 + ".jpg";
+							if ( parseInt(obj.temperature) >30 ){
+								slots[2] = "images/ad" + 3 + ".jpg";
+							}else{
+								slots[2] = "images/ad" + 2 + ".jpg";
+							}
+						}
 						date = obj.time;
 						temperature = obj.temperature;
 						humidity = obj.humidity;
