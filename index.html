@@ -215,9 +215,9 @@
 					success: function(resp){
 						//alert(resp);
 						var obj = JSON.parse(resp);
-						// slots[0] = imgs[obj.index1];
-						// slots[1] = imgs[obj.index2];
-						// slots[2] = imgs[obj.index3];
+						slots[0] = imgs[obj.index1];
+						slots[1] = imgs[obj.index2];
+						slots[2] = imgs[obj.index3];
 						console.log(obj.index1, obj.index2, obj.index3);
 						
 						date = obj.time;
